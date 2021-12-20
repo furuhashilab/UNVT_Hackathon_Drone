@@ -1,0 +1,131 @@
+{
+  "version": 8,
+  "center": [
+    139.402666,
+    35.566931
+  ],
+  "zoom": 17,
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "rgb(40, 40, 40)"
+      }
+    },
+    {
+      "id": "relief",
+      "type": "raster",
+      "source": "relief",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "paint": {
+        "raster-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          1,
+          10,
+          0
+        ]
+      }
+    },
+    {
+      "id": "adm",
+      "type": "fill",
+      "source": "adm",
+      "source-layer": "AdmArea",
+      "paint": {
+        "fill-color": "rgb(91, 146, 229)",
+        "fill-outline-color": "rgba(91, 146, 229, 0)",
+        "fill-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0,
+          10,
+          1
+        ]
+      }
+    },
+    {
+      "id": "voxel",
+      "type": "fill-extrusion",
+      "source": "voxel",
+      "source-layer": "voxel",
+      "paint": {
+        "fill-extrusion-base": [
+          "get",
+          "h"
+        ],
+        "fill-extrusion-color": [
+          "get",
+          "color"
+        ],
+        "fill-extrusion-opacity": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          10,
+          0,
+          12,
+          1
+        ],
+        "fill-extrusion-height": [
+          "+",
+          [
+            "get",
+            "h"
+          ],
+          [
+            "get",
+            "spacing"
+          ]
+        ]
+      }
+    }
+  ],
+  "sources": {
+    "voxel": {
+      "type": "vector",
+      "attribution": "furuhashilab",
+      "minzoom": 10,
+      "maxzoom": 18,
+      "tiles": [
+        "https://hfu.github.io/UNVT_Hackathon_Meetup2022_Drone/zxy/{z}/{x}/{y}.pbf"
+      ]
+    },
+    "adm": {
+      "type": "vector",
+      "attribution": "<a title='測量法に基づく国土地理院長承認(使用)R 2JHs 1065'>R 2JHs 1065</a>",
+      "minzoom": 7,
+      "maxzoom": 13,
+      "tiles": [
+        "https://optgeo.github.io/fgd-adm/zxy/{z}/{x}/{y}.pbf"
+      ]
+    },
+    "relief": {
+      "type": "raster",
+      "minzoom": 0,
+      "maxzoom": 5,
+      "tileSize": 512,
+      "tiles": [
+        "https://optgeo.github.io/relief/zxy/{z}/{x}/{y}.png"
+      ]
+    }
+  }
+}
